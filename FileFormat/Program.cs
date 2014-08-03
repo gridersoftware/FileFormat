@@ -13,6 +13,9 @@ namespace FileFormat
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Grider Software FileFormat " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            Console.WriteLine();
+
             if (args.Length < 2)
             {
                 PrintHelp();
@@ -54,9 +57,6 @@ namespace FileFormat
                     }
                 }
             }
-
-            Console.WriteLine("Grider Software FileFormat " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
-            Console.WriteLine();
 
             // Generate code
             CodeGen code = new CodeGen(inputFile, outputFile);

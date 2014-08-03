@@ -397,6 +397,27 @@ namespace FileFormat
             return false;
         }
 
+        bool TryParseGlobalName(string name, out Variable v)
+        {
+            v = null;
+
+            try
+            {
+                CompoundType curr = current;
+                while (curr != null)
+                {
+                    v = curr.Variables[name];
+                    if (v != null) return true;
+                    else curr = curr.Parent;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         bool TryParseLocalName(string name, out Variable v)
         {
             v = null;
@@ -558,7 +579,7 @@ namespace FileFormat
             CompoundType c = null;
 
             if (CheckForGlobalName(name)) return null;
-            if (!TryParseLocalName(countVar, out cv)) return null;
+            if (!TryParseGlobalName(countVar, out cv)) return null;
 
             try
             {

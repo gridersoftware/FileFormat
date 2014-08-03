@@ -510,7 +510,8 @@ You may need to use this if you are using the Trees structure.
 ## Operators
 There is only one operator: the compare operator.
 
-### The compare operator, represented by two colons (::), allows a comparison or assignment between a file element and another value.
+### Compare
+The compare operator, represented by two colons (::), allows a comparison or assignment between a file element and another value.
 The other value can be a literal, the value of another file element, or the value of a #CONST directive.
 
 When reading a file, the compare operator will force a comparison between the value of the element on the left side of the operator

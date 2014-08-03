@@ -531,7 +531,7 @@ namespace FileFormat
 
             // Check for problems. If something isn't right, exit.
             if (CheckForGlobalName(name) | !TryParseTypeCode(type, out t)) return;
-            if (!TryParseLocalName(countVar, out cv)) return;
+            if (!TryParseGlobalName(countVar, out cv)) return;
             if (cv.TypeCode != TypeCode.Int32)
             {
                 Program.PrintError("Count variable must be an int32.", lineNumber);
@@ -643,7 +643,7 @@ namespace FileFormat
             CompoundType c = null;
 
             if (CheckForGlobalName(name)) return null;
-            if (!TryParseLocalName(countVar, out cv)) return null;
+            if (!TryParseGlobalName(countVar, out cv)) return null;
 
             try
             {

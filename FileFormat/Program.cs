@@ -27,6 +27,7 @@ namespace FileFormat
             // set flag defaults
             CompileFlags.ImplicitCounts = false;
             CompileFlags.Lang = CompileFlags.OutputLanguage.CSharp;
+            CompileFlags.TargetLang = new TargetLanguage() { outerTypeNonStaticAccess = false };
             CompileFlags.PrintOutput = false;
 
             if (args.Length >= 3)
@@ -40,7 +41,8 @@ namespace FileFormat
                         //    break;
 
                         case "/lang:cs":
-                            CompileFlags.Lang = CompileFlags.OutputLanguage.CSharp; 
+                            CompileFlags.Lang = CompileFlags.OutputLanguage.CSharp;
+                            CompileFlags.TargetLang = new TargetLanguage() { outerTypeNonStaticAccess = false };
                             break;
 
                         //case "/lang:vb":

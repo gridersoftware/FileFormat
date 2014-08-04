@@ -334,6 +334,8 @@ namespace FileFormat
                 string name = substrings[4];
                 int count;
                 if (!name.Substring(1).All(c => Char.IsLetterOrDigit(c))) Program.PrintError("Name must start with $ followed by a lowercase letter, and contain only lowercase letters and numbers.", lineNumber);
+                if (structName.ToLower() == name.ToLower().Substring(1, name.Length - 1))
+                    Program.PrintWarning("Possible ambiguity between structure name and element name.", lineNumber);
 
                 if ((structState.Count > 0) && (structState.Peek() == StructState.StructDeclare)) Program.PrintError("\'{\' Expected.", lineNumber);
 
@@ -401,6 +403,17 @@ namespace FileFormat
         {
             v = null;
 
+            // This determines whether the target language requires members to be local.
+            if (!CompileFlags.TargetLang.outerTypeNonStaticAccess)
+            {
+                bool result = TryParseLocalName(name, out v);
+                if (!result)
+                    Program.PrintError("Target language does not allow access to non-static variables in outer\n  type." +
+                                        "The element \"" + name + "\" either doesn't exist, or is in\n  an outer structure.", lineNumber);
+                return result;
+            }
+
+            // If it's allowed, go ahead and continue.
             try
             {
                 CompoundType curr = current;

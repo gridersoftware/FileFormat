@@ -19,6 +19,11 @@ namespace FileFormat
         public static OutputLanguage Lang { get; set; }
 
         /// <summary>
+        /// Gets or sets the rules associated with the target language.
+        /// </summary>
+        public static TargetLanguage TargetLang { get; set; }
+
+        /// <summary>
         /// Gets or sets a value that determines whether array and structure count reference values are 
         /// implicitly determined from array lengths. Default value is false.
         /// </summary>

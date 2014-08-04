@@ -290,6 +290,8 @@ namespace FileFormat
                 string name = parts[2];
 
                 if (!name.Substring(1).All(c => Char.IsLetterOrDigit(c))) Program.PrintError("Name must start with $ followed by a lowercase letter, and contain only lowercase letters and numbers.", lineNumber);
+                if (structName.ToLower() == name.ToLower().Substring(1, name.Length - 1))
+                    Program.PrintWarning("Possible ambiguity between structure name and element name.", lineNumber);
 
                 newest = CreateTree(name, structName);
                 structState.Push(StructState.StructDeclare);
@@ -306,6 +308,8 @@ namespace FileFormat
                 int count;
 
                 if (!name.Substring(1).All(c => Char.IsLetterOrDigit(c))) Program.PrintError("Name must start with $ followed by a lowercase letter, and contain only lowercase letters and numbers.", lineNumber);
+                if (structName.ToLower() == name.ToLower().Substring(1, name.Length - 1))
+                    Program.PrintWarning("Possible ambiguity between structure name and element name.", lineNumber);
 
                 if ((structState.Count > 0) && (structState.Peek() == StructState.StructDeclare)) Program.PrintError("\'{\' Expected.", lineNumber);
 
